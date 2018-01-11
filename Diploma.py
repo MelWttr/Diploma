@@ -5,8 +5,7 @@ import time
 
 AUTHORIZER_URL = "https://oauth.vk.com/authorize"
 VERSION = "5.69"
-ID = "105932"
-# ID = "171691064"
+ID = "171691064"
 
 TOKEN = "5dfd6b0dee902310df772082421968f4c06443abecbc082a8440cb18910a56daca73ac8d04b25154a1128"
 
