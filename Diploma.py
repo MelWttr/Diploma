@@ -137,4 +137,4 @@ def get_info(groups_id):
 
 # pprint(get_friends())
 # pprint(get_info(searching_friends(get_groups_id())))
-print(searching_friends(ID, get_groups_id(ID)))
+print(get_info(searching_friends(ID, get_groups_id(ID))))
