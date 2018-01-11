@@ -56,7 +56,7 @@ def searching_friends(user_id, groups): # Вариант №1
         print(".")
         time.sleep(0.3333)
         try:
-            count = response.json()["response"]["count"]
+            count = response.json()["response"]
 
         except:
             print("KeyError")
