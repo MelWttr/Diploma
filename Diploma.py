@@ -40,31 +40,31 @@ def get_friends(user_id):  # возвращает список id друзей
     return friends
 
 
-def searching_friends(user_id, groups): # Вариант №1
-    matched = []
-    for g in groups:
-        params = {
-            "user_id": user_id,
-            "group_id": g,
-            "filter": "friends",
-            "access_token": TOKEN,
-            "v": VERSION
-        }
+# def searching_friends(user_id, groups): # Вариант №1
+#     matched = []
+#     for g in groups:
+#         params = {
+#             "user_id": user_id,
+#             "group_id": g,
+#             "filter": "friends",
+#             "access_token": TOKEN,
+#             "v": VERSION
+#         }
 
-        response = requests.get("https://api.vk.com/method/groups.getMembers", params)
-        print(".")
-        time.sleep(0.3333)
-        try:
-            count = response.json()["response"]["count"]
-            if count == 0:
-                matched.append(g)
-            else:
-                continue
-        except:
-            print("KeyError")
-            continue
+#         response = requests.get("https://api.vk.com/method/groups.getMembers", params)
+#         print(".")
+#         time.sleep(0.3333)
+#         try:
+#             count = response.json()["response"]["count"]
+#             if count == 0:
+#                 matched.append(g)
+#             else:
+#                 continue
+#         except:
+#             print("KeyError")
+#             continue
 
-    return matched
+#     return matched
 
 
 # def searching_friends(friends, groups): # Вариант №2
@@ -97,18 +97,19 @@ def searching_friends(user_id, groups): # Вариант №1
 #
 #     return matched
 
-# def searching_friends(user_id):              # Вариант № 3
-#     my_groups = set(get_groups_id(user_id))
-#     friends = get_friends(user_id)
-#     for f in friends:
-#         try:
-#             friend_groups = set(get_groups_id(f))# тут возникает ошибка ключа, поэтому обрабатываю
-#             my_groups = my_groups - friend_groups
-#             time.sleep(0.3)
-#         except:
-#             print("Error in searching_friends")
-#
-#     return friend_groups
+def searching_friends(user_id):              # Вариант № 3
+  my_groups = set(get_groups_id(user_id))
+    friends = get_friends(user_id)
+    for f in friends:
+        try:
+            friend_groups = set(get_groups_id(f))
+            my_groups = my_groups - friend_groups
+            time.sleep(0.3333)
+        except Exception as e:
+            print("KeyError:", e)
+            continue
+
+    return my_groups
 
 
 def get_info(groups_id):
@@ -135,6 +136,4 @@ def get_info(groups_id):
     print()
     return groups_info
 
-# pprint(get_friends())
-# pprint(get_info(searching_friends(get_groups_id())))
 pprint(get_info(searching_friends(ID, get_groups_id(ID))))
